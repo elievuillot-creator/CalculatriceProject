@@ -2,7 +2,7 @@ class fictiveCALC():
     def __init__:
         None
     def addition(self,a,b):
-        sum=a+b
+        sum=a+b+a
         return sum
     def soustraction(self,a,b):
         None
