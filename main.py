@@ -6,17 +6,30 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
     def soustraction(self,a,b):
        return a-b
     def multiplication(self,a,b):
-        n=1
-        for i in range(int(b)):
-            n += a
-    def division(self,a,b):
+        n = float(a)
+        if a == 0 or b == 0 :
+            return 0
+        else :
+            for i in range(int(b)-1):
+                n = n + float(a)
+            return n
+
+    def divisionEUC(self,a,b):
         n = int(a)
         PartInt = 0
         while n > 0:
             PartInt = PartInt +1
             n-=int(b)
         reste = int(a) - self.multiplication(b,PartInt)
-        return PartInt, reste
+        if not reste == 0 :
+            PartInt = PartInt - 1
+        return PartInt, abs(reste)
+
+    def division(self, a, b):
+        q, n = self.divisionEUC(a,b)
+        while (self.multiplication(q,b)-a) < 0:
+            q = q + 0.01
+        return q
 
     def fibonacci(self,a):
         fn2 = 1
@@ -30,18 +43,28 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
     def puissance(self,a, n):
         result = 1
         for i in range(int(n)):
-            result = self.multiplication(result,a)
+            result = self.multiplication(result, a)
+        return (result)
+
+    def factoriel(self, n):
+        a = 1
+        for i in range(1,n+1):
+            a = self.multiplication(a, i)
+        return a
 
     def exp(self, a):
-        self.puissance(2.7, a)
+        b = 1
+        for n in range(1, 10):
+            b = b + self.division(self.puissance(a, n),self.factoriel(n))
+        return b
 
     def premier(self,a):
         for i in range(2, int(a)):
             x, y = self.division(a,i)
-            if y = 0:
+            if y == 0:
                 print("Pas premier")
                 break
         print("premier")
 
 CALC = CALC()
-print(CALC.puissance(2,8))
+print(CALC.exp(10))
