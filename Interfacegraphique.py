@@ -45,7 +45,7 @@ for c in range(3):
 
 calcul=[("+",0,0),("-",0,1),("*",0,2),
          ("/",1,0),('fibo',1,1),("premier",1,2),
-         ("=",2,0),("",2,1),("",2,2)]
+         ("e",2,0),("=",2,1),("",2,2)]
 for chf,l,c in calcul:
     if chf=="=":
         bouton = tk.Button(master=frm_bouton_calcul, text=chf)
