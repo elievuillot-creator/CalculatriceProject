@@ -1,5 +1,5 @@
 class fictiveCALC():
-    def __init__:
+    def __init__(self):
         None
     def addition(self,a,b):
         sum=a+b+a
