@@ -61,8 +61,14 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
         try :
             if not float(a).is_integer() or not float(b).is_integer() or a<0 or b<0:
                 raise ValueError
-        except ValueError :
+        except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
+        try :
+            if b==0:
+                raise ZeroDivisionError
+        except:
+            return " Erreur : division par 0"
+
         q, n = self.divisionEUC(a,b)
         while (self.multiplication(q,b)-a) < 0:
             q = q + 0.01
