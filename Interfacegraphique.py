@@ -6,9 +6,25 @@ from tkinter import ttk
 window=tk.Tk()
 window.title("CALCULATRICE de Elie et Isa")
 #window.configure(bg="#483C32")
-def executercalcul():
+def recup_calcul():
     entree=TXT_ent.get("1.0","end")
     return entree
+    #fonction qui récupère la string dans l'écran
+
+def ecrire_touche(valeur):
+    TXT_ent.insert("end",str(valeur))
+
+def calcul(entree):
+
+    #fonction qui récupère une string et la transforme en chiffre et en opéateur puos exécute le calcul
+    #return calcul fait
+    pass
+
+def executer_calcul():
+    calc=recup_calcul()
+    TXT_ent.delete("1.0","end")
+    TXT_ent.insert("end","calcul fait")
+
 
 
 #Frames
@@ -34,7 +50,7 @@ chiffres=[(1,0,0),(2,0,1),(3,0,2),
          (4,1,0),(5,1,1),(6,1,2),
          (7,2,0),(8,2,1),(9,2,2)]
 for chf,l,c in chiffres:
-        bouton=tk.Button(master=frm_bouton_chf, text=f"{chf}")
+        bouton=tk.Button(master=frm_bouton_chf, text=f"{chf}", command=lambda val=chf:ecrire_touche(val))
         bouton.grid(row=l,column=c,ipadx=10, ipady=10,
                     padx=0,pady=0,sticky="NSEW")
         #frm_bouton_chf.columnconfigure(c,weight=1)
@@ -51,10 +67,10 @@ calcul=[("+",0,0),("-",0,1),("*",0,2),
          ("/",1,0),('fibo',1,1),("premier",1,2),
          ("e",2,0),("!",2,1)]
 for chf,l,c in calcul:
-    bouton=tk.Button(master=frm_bouton_calcul, text=chf)
+    bouton=tk.Button(master=frm_bouton_calcul, text=chf,command=lambda val=chf:ecrire_touche(val))
     bouton.grid(row=l,column=c,ipadx=10,ipady=10,sticky="NSEW")
 
-BUT_exe=tk.Button(master=frm_bouton_calcul, text="calculer\n=",command=executercalcul)
+BUT_exe=tk.Button(master=frm_bouton_calcul, text="calculer\n=",command=executer_calcul)
 BUT_exe.grid(row=2,column=2,ipadx=10,ipady=10,sticky="NSEW")
 
 
