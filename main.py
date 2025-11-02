@@ -63,7 +63,7 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
                 raise ValueError
         except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
-        try :
+        try : #0
             if b==0:
                 raise ZeroDivisionError
         except:
