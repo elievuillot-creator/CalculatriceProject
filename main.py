@@ -2,10 +2,26 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
     def __init__(self):
         None
     def addition(self,a,b):
+        try:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+                raise ValueError
+        except ValueError:
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         return a+b
     def soustraction(self,a,b):
-       return a-b
+        try:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+                raise ValueError
+        except ValueError:
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
+        return a-b
+
     def multiplication(self,a,b):
+        try:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+                raise ValueError
+        except ValueError:
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         n = float(a)
         if a == 0 or b == 0 :
             return 0
@@ -14,7 +30,23 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
                 n = n + float(a)
             return n
 
+    def multipicationFLOAT(self,a, b):
+        a = float(a)
+        b = float(b)
+        a = round(a,2)
+        b = round(b,2)
+        a2 = round(self.multiplication(a, 1000))
+        b2 = round(self.multiplication(b, 1000))
+        result = self.multiplication(a2,b2)
+        result = self.division(result,1000000)
+        return result
+
     def divisionEUC(self,a,b):
+        try:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+                raise ValueError
+        except ValueError:
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         n = int(a)
         PartInt = 0
         while n > 0:
@@ -26,12 +58,22 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
         return PartInt, abs(reste)
 
     def division(self, a, b):
+        try :
+            if not float(a).is_integer() or not float(b).is_integer() or a<0 or b<0:
+                raise ValueError
+        except ValueError :
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         q, n = self.divisionEUC(a,b)
         while (self.multiplication(q,b)-a) < 0:
             q = q + 0.01
         return q
 
     def fibonacci(self,a):
+        try :
+            if not float(a).is_integer() or a<0:
+                raise ValueError
+        except ValueError :
+            return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         fn2 = 1
         fn1 = 0
         for i in range(a):
@@ -41,30 +83,53 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
         return result
 
     def puissance(self,a, n):
-        result = 1
-        for i in range(int(n)):
-            result = self.multiplication(result, a)
-        return (result)
+        try :
+            if not float(a).is_integer() or not float(n).is_integer() or a<0 or n<0:
+                raise ValueError
+            result = 1
+            for i in range(int(n)):
+               result = self.multipicationFLOAT(result, a)
+            return result
+        except ValueError :
+            return "Erreur, seul les opérations sur des entiers naturels sont autoisés !"
+
 
     def factoriel(self, n):
-        a = 1
-        for i in range(1,n+1):
-            a = self.multiplication(a, i)
-        return a
-
-    def exp(self, a):
-        b = 1
-        for n in range(1, 10):
-            b = b + self.division(self.puissance(a, n),self.factoriel(n))
-        return b
+        try :
+            if not float(n).is_integer() or n<0:
+                raise ValueError
+            a = 1
+            for i in range(1,n+1):
+                a = self.multiplication(a, i)
+            return a
+        except ValueError :
+            return "Erreur : seul les opérations sur des entiers naturels sont autorisés !"
 
     def premier(self,a):
-        for i in range(2, int(a)):
-            x, y = self.division(a,i)
-            if y == 0:
-                print("Pas premier")
-                break
-        print("premier")
+        try :
+          if not not float(a).is_integer() or a<0:
+              raise ValueError
+          for i in range(2, int(a)):
+             x, y = self.division(a,i)
+             if y == 0:
+                 print("Pas premier")
+                 break
+          print("premier")
+        except ValueError :
+            return "Erreur : seul les opérations sur des entiers naturels sont autorisés !"
 
-CALC = CALC()
-print(CALC.exp(10))
+    def exp(self, x):   # approximation d'exp ( plus précise pour des nombre petits )
+        e = 2.718  # valeur approximative
+        try :
+          if x < 0 or not float(x).is_integer():  # vérifier que le x est conforme
+              raise ValueError
+          if x == 0:
+              return 1.0
+          elif x > 0:
+              result = 1.0
+              for _ in range(int(x)):
+                  result = self.multipicationFLOAT(result, e)   # on fait e puissance x
+              return result
+        except ValueError :
+            return "Erreur, seul les opérations sur les entiers naturels sont autorisés !"
+
