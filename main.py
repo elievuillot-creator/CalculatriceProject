@@ -18,7 +18,7 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
 
     def multiplication(self,a,b):
         try:
-            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+            if not float(b).is_integer() or a < 0 or b < 0:
                 raise ValueError
         except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
@@ -43,7 +43,7 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
 
     def divisionEUC(self,a,b):
         try:
-            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0 or b == 0:
                 raise ValueError
         except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
@@ -59,7 +59,7 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
 
     def division(self, a, b):
         try :
-            if not float(a).is_integer() or not float(b).is_integer() or a<0 or b<0:
+            if not float(a).is_integer() or not float(b).is_integer() or a<0 or b<0 or b==0 :
                 raise ValueError
         except ValueError :
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
