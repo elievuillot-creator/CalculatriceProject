@@ -1,6 +1,7 @@
 import tkinter as tk
-from doctest import master
-from tkinter import ttk
+from main import CALC
+
+Calc=CALC()
 
 #FENETRE
 window=tk.Tk()
@@ -14,16 +15,48 @@ def recup_calcul():
 def ecrire_touche(valeur):
     TXT_ent.insert("end",str(valeur))
 
-def calcul(entree):
+def calcul():
+    nb1=""
+    nb2=""
+    operateur=""
+    entree=recup_calcul().strip()
 
+    for i in range(len(entree)):
+        char=entree[i]
+
+        if operateur=="" and char in "0123456789":
+            nb1+=char
+        elif char in "+-/*" and operateur=="" :
+            operateur=char
+        elif char in "0123456789" and operateur!="" :
+            nb2+=char
+        else:
+            TXT_ent.delete("1.0", "end")
+            TXT_ent.insert("end","Calcul invalide")
+
+    nb1 = int(nb1)
+    nb2 = int(nb2)
+
+    if operateur =="+":
+        return Calc.addition(nb1,nb2)
+    if operateur =="-":
+        return Calc.soustraction(nb1,nb2)
+    if operateur =="*":
+        return Calc.multiplication(nb1,nb2)
+    if operateur =="/":
+        return Calc.divisionEUC(nb1,nb2)
+    else:
+        return None
+
+
+    #gestion des priorités, faire une pile avec l'ordre des choses à faire
     #fonction qui récupère une string et la transforme en chiffre et en opéateur puos exécute le calcul
     #return calcul fait
     pass
 
 def executer_calcul():
-    calc=recup_calcul()
     TXT_ent.delete("1.0","end")
-    TXT_ent.insert("end","calcul fait")
+    TXT_ent.insert("end",f"{calcul()}")
 
 
 
@@ -63,15 +96,14 @@ for c in range(3):
     frm_bouton_chf.columnconfigure(c,weight=1)
     frm_bouton_calcul.columnconfigure(c, weight=1)
 
-calcul=[("+",0,0),("-",0,1),("*",0,2),
+operateur=[("+",0,0),("-",0,1),("*",0,2),
          ("/",1,0),('fibo',1,1),("premier",1,2),
          ("e",2,0),("!",2,1)]
-for chf,l,c in calcul:
+for chf,l,c in operateur:
     bouton=tk.Button(master=frm_bouton_calcul, text=chf,command=lambda val=chf:ecrire_touche(val))
     bouton.grid(row=l,column=c,ipadx=10,ipady=10,sticky="NSEW")
 
 BUT_exe=tk.Button(master=frm_bouton_calcul, text="calculer\n=",command=executer_calcul)
 BUT_exe.grid(row=2,column=2,ipadx=10,ipady=10,sticky="NSEW")
-
 
 window.mainloop()
