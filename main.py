@@ -118,9 +118,8 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
           for i in range(2, int(a)):
              x, y = self.division(a,i)
              if y == 0:
-                 print("Pas premier")
-                 break
-          print("premier")
+                 return "Pas premier"
+          return "premier"
         except ValueError :
             return "Erreur : seul les opérations sur des entiers naturels sont autorisés !"
 

@@ -63,7 +63,7 @@ def calcul():
             nb2 += char
                 # TXT_ent.insert("end", f'nb2: {nb2} / type:{type(nb2)}')
         elif char =="!" and operateur=="":
-            return Calc.exp(int(nb1))
+            return Calc.factoriel(int(nb1))
         else:
             TXT_ent.delete("1.0", "end")
             TXT_ent.insert("end", "Calcul invalide")
