@@ -16,35 +16,46 @@ def ecrire_touche(valeur):
     TXT_ent.insert("end",str(valeur))
 
 def calcul():
-    nb1=""
-    nb2=""
-    operateur=""
-    entree=recup_calcul().strip()
+    nb1 = ""
+    nb2 = ""
+    operateur = ""
+    entree = recup_calcul().strip()
 
     for i in range(len(entree)):
-        char=entree[i]
+        char = entree[i]
+        # TXT_ent.insert("end",f"interation {i} / char: {char} /type:{type(char)} /op:{operateur} \n")
+        # TXT_ent.insert("end", f'{entree},type:{type(entree)}')
 
-        if operateur=="" and char in "0123456789":
-            nb1+=char
-        elif char in "+-/*" and operateur=="" :
-            operateur=char
-        elif char in "0123456789" and operateur!="" :
-            nb2+=char
+        if operateur == "" and char in "0123456789":
+
+            nb1 += char
+            # TXT_ent.insert("end", f'nb1: {nb1} / type:{type(nb1)}')
+        elif char in "+-/*" and operateur == "":
+            operateur = char
+                # TXT_ent.insert("end", f'opérateur: {operateur} / type:{type(operateur)}')
+        elif char in "0123456789" and operateur != "":
+            nb2 += char
+                # TXT_ent.insert("end", f'nb2: {nb2} / type:{type(nb2)}')
         else:
             TXT_ent.delete("1.0", "end")
-            TXT_ent.insert("end","Calcul invalide")
+            TXT_ent.insert("end", "Calcul invalide")
 
-    nb1 = int(nb1)
-    nb2 = int(nb2)
+        # TXT_ent.insert("end", f'nb1: {nb1} / type:{type(nb1)}')
+    nb1int = int(nb1)
+    nb2int = int(nb2)
+        # TXT_ent.insert("end", f"{nb1int}, type {type(nb1int)}")
+        # TXT_ent.insert("end", f'opérateur: {operateur} / type:{type(operateur)}')
 
-    if operateur =="+":
-        return Calc.addition(nb1,nb2)
-    if operateur =="-":
-        return Calc.soustraction(nb1,nb2)
-    if operateur =="*":
-        return Calc.multiplication(nb1,nb2)
-    if operateur =="/":
-        return Calc.divisionEUC(nb1,nb2)
+    if operateur == "+":
+        # TXT_ent.insert("end","hey")
+        # TXT_ent.insert("end",f"{Calc.addition(nb1int,nb2int)}")
+        return Calc.addition(nb1int, nb2int)
+    if operateur == "-":
+        return Calc.soustraction(nb1int, nb2int)
+    if operateur == "*":
+        return Calc.multiplication(nb1int, nb2int)
+    if operateur == "/":
+        return Calc.divisionEUC(nb1int, nb2int)
     else:
         return None
 
@@ -52,13 +63,18 @@ def calcul():
     #gestion des priorités, faire une pile avec l'ordre des choses à faire
     #fonction qui récupère une string et la transforme en chiffre et en opéateur puos exécute le calcul
     #return calcul fait
-    pass
+
 
 def executer_calcul():
+    calc_exec=calcul()
     TXT_ent.delete("1.0","end")
-    TXT_ent.insert("end",f"{calcul()}")
+    TXT_ent.insert("end",calc_exec)
 
+def effacer_lettre():
+    TXT_ent.delete("insert-1c", "insert")
 
+def effacer_tout():
+    TXT_ent.delete("1.0","end")
 
 #Frames
 frame_affichage=tk.Frame(window)
@@ -76,8 +92,7 @@ TXT_ent=tk.Text(bg="#483C32",
                 width=50,
                 master=frame_affichage)
 
-
-TXT_ent.pack()
+TXT_ent.pack(expand=True,fill="both")
 
 chiffres=[(1,0,0),(2,0,1),(3,0,2),
          (4,1,0),(5,1,1),(6,1,2),
@@ -97,13 +112,19 @@ for c in range(3):
     frm_bouton_calcul.columnconfigure(c, weight=1)
 
 operateur=[("+",0,0),("-",0,1),("*",0,2),
-         ("/",1,0),('fibo',1,1),("premier",1,2),
-         ("e",2,0),("!",2,1)]
+           ("/",1,0),('fibo',1,1),("premier",1,2), ("e",2,0),("!",2,1),(".",2,2)]
 for chf,l,c in operateur:
     bouton=tk.Button(master=frm_bouton_calcul, text=chf,command=lambda val=chf:ecrire_touche(val))
     bouton.grid(row=l,column=c,ipadx=10,ipady=10,sticky="NSEW")
 
 BUT_exe=tk.Button(master=frm_bouton_calcul, text="calculer\n=",command=executer_calcul)
-BUT_exe.grid(row=2,column=2,ipadx=10,ipady=10,sticky="NSEW")
+BUT_exe.grid(row=2,column=3,ipadx=10,ipady=10,sticky="NSEW")
+
+BUT_effacer=tk.Button(master=frm_bouton_calcul, text="←",command=effacer_lettre)
+BUT_effacer.grid(row=0,column=3,ipadx=10,ipady=10,sticky="NSEW")
+
+BUT_AC = tk.Button(master=frm_bouton_calcul, text="AC",command=effacer_tout)
+BUT_AC.grid(row=1,column=3,ipadx=10,ipady=10,sticky="NSEW")
+
 
 window.mainloop()
