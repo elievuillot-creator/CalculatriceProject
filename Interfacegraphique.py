@@ -21,13 +21,39 @@ def calcul():
     operateur = ""
     entree = recup_calcul().strip()
 
+    if "fibo" in entree:
+        entree.split("fibo")
+        nb = entree.split("fibo")[1]
+        try:
+            nb=int(nb)
+        except ValueError:
+            TXT_ent.insert("erreur")
+
+        return Calc.fibonacci(nb)
+    if "premier" in entree:
+        entree.split("premier")
+        nb = entree.split("premier")[1]
+        try:
+            nb=int(nb)
+        except ValueError:
+            TXT_ent.insert("erreur")
+
+        return Calc.premier(nb)
+    if "exp" in entree:
+        nb = entree.split("exp")[1]
+        try:
+            nb = int(nb)
+        except ValueError:
+            TXT_ent.insert("erreur")
+
+        return Calc.exp(nb)
+
     for i in range(len(entree)):
         char = entree[i]
         # TXT_ent.insert("end",f"interation {i} / char: {char} /type:{type(char)} /op:{operateur} \n")
         # TXT_ent.insert("end", f'{entree},type:{type(entree)}')
 
         if operateur == "" and char in "0123456789":
-
             nb1 += char
             # TXT_ent.insert("end", f'nb1: {nb1} / type:{type(nb1)}')
         elif char in "+-/*" and operateur == "":
@@ -36,6 +62,8 @@ def calcul():
         elif char in "0123456789" and operateur != "":
             nb2 += char
                 # TXT_ent.insert("end", f'nb2: {nb2} / type:{type(nb2)}')
+        elif char =="!" and operateur=="":
+            return Calc.exp(int(nb1))
         else:
             TXT_ent.delete("1.0", "end")
             TXT_ent.insert("end", "Calcul invalide")
@@ -67,8 +95,7 @@ def calcul():
 
 def executer_calcul():
     calc_exec=calcul()
-    TXT_ent.delete("1.0","end")
-    TXT_ent.insert("end",calc_exec)
+    TXT_ent.insert("end",f"= {calc_exec}")
 
 def effacer_lettre():
     TXT_ent.delete("insert-1c", "insert")
@@ -96,7 +123,8 @@ TXT_ent.pack(expand=True,fill="both")
 
 chiffres=[(1,0,0),(2,0,1),(3,0,2),
          (4,1,0),(5,1,1),(6,1,2),
-         (7,2,0),(8,2,1),(9,2,2)]
+         (7,2,0),(8,2,1),(9,2,2),
+        ("",3,0),(0,3,1),("",3,2)]
 for chf,l,c in chiffres:
         bouton=tk.Button(master=frm_bouton_chf, text=f"{chf}", command=lambda val=chf:ecrire_touche(val))
         bouton.grid(row=l,column=c,ipadx=10, ipady=10,
@@ -111,8 +139,8 @@ for c in range(3):
     frm_bouton_chf.columnconfigure(c,weight=1)
     frm_bouton_calcul.columnconfigure(c, weight=1)
 
-operateur=[("+",0,0),("-",0,1),("*",0,2),
-           ("/",1,0),('fibo',1,1),("premier",1,2), ("e",2,0),("!",2,1),(".",2,2)]
+operateur=[("+",0,0),("-",0,1),("*",1,1),
+           ("/",1,0),('fibo',0,2),("premier",1,2), ("exp",2,2),("!",2,1),(".",2,0)]
 for chf,l,c in operateur:
     bouton=tk.Button(master=frm_bouton_calcul, text=chf,command=lambda val=chf:ecrire_touche(val))
     bouton.grid(row=l,column=c,ipadx=10,ipady=10,sticky="NSEW")
