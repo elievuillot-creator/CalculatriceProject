@@ -33,8 +33,8 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
     def multipicationFLOAT(self,a, b):
         a = float(a)
         b = float(b)
-        a = round(a,2)
-        b = round(b,2)
+        a = round(a,3)
+        b = round(b,3)
         a2 = round(self.multiplication(a, 1000))
         b2 = round(self.multiplication(b, 1000))
         result = self.multiplication(a2,b2)
