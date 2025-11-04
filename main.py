@@ -113,10 +113,10 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
 
     def premier(self,a):
         try :
-          if not not float(a).is_integer() or a<0:
+          if not float(a).is_integer() or a<0:
               raise ValueError
           for i in range(2, int(a)):
-             x, y = self.division(a,i)
+             x, y = self.divisionEUC(a,i)
              if y == 0:
                  return "Pas premier"
           return "premier"
