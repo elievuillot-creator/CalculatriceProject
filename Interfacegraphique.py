@@ -62,8 +62,8 @@ def calcul():
         elif char in "0123456789" and operateur != "":
             nb2 += char
                 # TXT_ent.insert("end", f'nb2: {nb2} / type:{type(nb2)}')
-        elif char =="e" and operateur=="":
-            return Calc.exp(int(nb1))
+        elif char =="!" and operateur=="":
+            return Calc.factoriel(int(nb1))
         else:
             TXT_ent.delete("1.0", "end")
             TXT_ent.insert("end", "Calcul invalide")
@@ -83,7 +83,7 @@ def calcul():
     if operateur == "*":
         return Calc.multiplication(nb1int, nb2int)
     if operateur == "/":
-        return round(Calc.division(nb1int, nb2int), 2)
+        return Calc.divisionEUC(nb1int, nb2int)
     else:
         return None
 
