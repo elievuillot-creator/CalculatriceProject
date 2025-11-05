@@ -84,7 +84,7 @@ def calcul():
         if operateur == "*":
             return Calc.multiplication(nb1int, nb2int)
         if operateur == "/":
-            return Calc.divisionEUC(nb1int, nb2int)
+            return Calc.division(nb1int, nb2int)
     if operateur == "" :
             return nb1
     else:
