@@ -66,24 +66,27 @@ def calcul():
             return Calc.factoriel(int(nb1))
         else:
             TXT_ent.delete("1.0", "end")
-            TXT_ent.insert("end", "Calcul invalide")
+            return "Calcul invalide"
 
         # TXT_ent.insert("end", f'nb1: {nb1} / type:{type(nb1)}')
-    nb1int = int(nb1)
-    nb2int = int(nb2)
+    if nb1 and nb2 :
+        nb1int = int(nb1)
+        nb2int = int(nb2)
         # TXT_ent.insert("end", f"{nb1int}, type {type(nb1int)}")
         # TXT_ent.insert("end", f'opérateur: {operateur} / type:{type(operateur)}')
 
-    if operateur == "+":
-        # TXT_ent.insert("end","hey")
-        # TXT_ent.insert("end",f"{Calc.addition(nb1int,nb2int)}")
-        return Calc.addition(nb1int, nb2int)
-    if operateur == "-":
-        return Calc.soustraction(nb1int, nb2int)
-    if operateur == "*":
-        return Calc.multiplication(nb1int, nb2int)
-    if operateur == "/":
-        return Calc.divisionEUC(nb1int, nb2int)
+        if operateur == "+":
+            # TXT_ent.insert("end","hey")
+            # TXT_ent.insert("end",f"{Calc.addition(nb1int,nb2int)}")
+            return Calc.addition(nb1int, nb2int)
+        if operateur == "-":
+            return Calc.soustraction(nb1int, nb2int)
+        if operateur == "*":
+            return Calc.multiplication(nb1int, nb2int)
+        if operateur == "/":
+            return Calc.divisionEUC(nb1int, nb2int)
+    if operateur == "" :
+            return nb1
     else:
         return None
 

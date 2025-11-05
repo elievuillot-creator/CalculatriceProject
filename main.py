@@ -1,14 +1,14 @@
 class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC = CALC() CALC.addition(a,b) pour avoir les résultats
     def __init__(self):
         None
-    def addition(self,a,b):
+    def addition(self,a,b=0):
         try:
             if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
                 raise ValueError
         except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         return a+b
-    def soustraction(self,a,b):
+    def soustraction(self,a,b=0):
         try:
             if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
                 raise ValueError
@@ -16,7 +16,7 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
         return a-b
 
-    def multiplication(self,a,b):
+    def multiplication(self,a,b=1):
         try:
             if not float(b).is_integer() or a < 0 or b < 0:
                 raise ValueError
@@ -43,10 +43,15 @@ class CALC():     # il va suffir ensuite de lacher des avec préalablement CALC 
 
     def divisionEUC(self,a,b):
         try:
-            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0 or b == 0:
+            if not float(a).is_integer() or not float(b).is_integer() or a < 0 or b < 0:
                 raise ValueError
         except ValueError:
             return "Erreur : seul les opérations sur des nombres entiers sont autorisés !"
+        try :
+            if b ==0:
+                raise ZeroDivisionError
+        except ZeroDivisionError:
+            return "Erreur divison par 0"
         n = int(a)
         PartInt = 0
         while n > 0:
